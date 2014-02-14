@@ -1,0 +1,7 @@
+org\imo\ImoService.class
+org\imo\ImoService$1.class
+org\imo\entities\Person.class
+org\imo\dao\PersonDAO.class
+org\imo\ImoConfiguration.class
+org\imo\TemplateHealthCheck.class
+org\imo\resources\PersonResource.class
