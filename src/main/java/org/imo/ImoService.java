@@ -6,13 +6,13 @@ import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.DatabaseConfiguration;
 import com.yammer.dropwizard.hibernate.HibernateBundle;
-import org.imo.dao.PersonDAO;
-import org.imo.entities.Person;
-import org.imo.resources.PersonResource;
+import org.imo.dao.OfferDAO;
+import org.imo.entities.Offer;
+import org.imo.restresources.OfferResource;
 
 public class ImoService extends Service<ImoConfiguration> {
 
-    private final HibernateBundle<ImoConfiguration> hibernate = new HibernateBundle<ImoConfiguration>(Person.class) {
+    private final HibernateBundle<ImoConfiguration> hibernate = new HibernateBundle<ImoConfiguration>(Offer.class) {
         @Override
         public DatabaseConfiguration getDatabaseConfiguration(ImoConfiguration configuration) {
             return configuration.getDatabaseConfiguration();
@@ -27,14 +27,14 @@ public class ImoService extends Service<ImoConfiguration> {
     public void initialize(Bootstrap<ImoConfiguration> bootstrap) {
         bootstrap.setName("Imobiliare");
         bootstrap.addBundle(hibernate);
-        bootstrap.addBundle(new AssetsBundle("/assets/", "/"));
+        bootstrap.addBundle(new AssetsBundle("/web/", "/"));
     }
 
     @Override
     public void run(ImoConfiguration configuration,
                     Environment environment) {
-        final PersonDAO dao = new PersonDAO(hibernate.getSessionFactory());
-        environment.addResource(new PersonResource(dao));
+        final OfferDAO dao = new OfferDAO(hibernate.getSessionFactory());
+        environment.addResource(new OfferResource(dao));
     }
 
 }
