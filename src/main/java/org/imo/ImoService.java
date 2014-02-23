@@ -20,6 +20,7 @@ public class ImoService extends Service<ImoConfiguration> {
     };
 
     public static void main(String[] args) throws Exception {
+        System.out.println("Starting imo...");
         new ImoService().run(args);
     }
 
